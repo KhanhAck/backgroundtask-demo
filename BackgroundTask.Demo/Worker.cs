@@ -78,8 +78,6 @@ namespace BackgroundTask.Demo
                         driver.SwitchTo().Window(tabs[0]);
 
                         Thread.Sleep(5000);
-
-                        driver.Quit();
                     }
                 }
                 catch (Exception ex)
