@@ -29,7 +29,7 @@ namespace BackgroundTask.Demo
             while (!cancellationToken.IsCancellationRequested)
             {
                 var r = new Random();
-                int rInt = r.Next(50000, 100000);
+                int rInt = r.Next(5000, 10000);
 
                 Interlocked.Increment(ref number);
                 logger.LogInformation($"Worker printing number: {number}");
@@ -42,6 +42,9 @@ namespace BackgroundTask.Demo
 
                     using (var driver = UndetectedChromeDriver.Instance("profile_name_ex", chromeOptions))
                     {
+                        Thread.Sleep(rInt);
+                        rInt = r.Next(5000, 10000);
+
                         var extension_Protocol = "chrome-extension";
                         var extension_ID = "bihmplhobchoageeokmgbdihknkjbknd";
 
@@ -58,38 +61,38 @@ namespace BackgroundTask.Demo
                         driver.SwitchTo().Window(tabs[0]);
 
                         Thread.Sleep(rInt);
-                        rInt = r.Next(50000, 100000);
+                        rInt = r.Next(5000, 10000);
 
                         //Click vào nút connect
                         driver.FindElement(By.Id("ConnectionButton")).Click();
 
                         Thread.Sleep(rInt);
-                        rInt = r.Next(50000, 100000);
+                        rInt = r.Next(5000, 10000);
 
                         driver.Navigate().GoToUrl("https://phim18.live");
 
                         Thread.Sleep(rInt);
-                        rInt = r.Next(50000, 100000);
+                        rInt = r.Next(5000, 10000);
 
                         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
                         var quickView = wait.Until(drv => drv.FindElement(By.XPath("//a[contains(text(), 'Xem nhanh')]")));
                         quickView.Click();
 
                         Thread.Sleep(rInt);
-                        rInt = r.Next(50000, 100000);
+                        rInt = r.Next(5000, 10000);
 
                         var button = wait.Until(drv => drv.FindElement(By.Id("video-content")));
                         button.Click();
 
                         Thread.Sleep(rInt);
-                        rInt = r.Next(50000, 100000);
+                        rInt = r.Next(5000, 10000);
 
                         //Switch về tab đầu tiên
                         driver.SwitchTo().Window(tabs[0]);
 
                         button.Click();
 
-                        rInt = r.Next(120000, 300000);
+                        rInt = r.Next(12000, 30000);
                         Thread.Sleep(rInt);
                     }
                 }
@@ -98,7 +101,7 @@ namespace BackgroundTask.Demo
                     logger.LogError(ex, ex.Message);
                 }
 
-                rInt = r.Next(50000, 100000);
+                rInt = r.Next(5000, 10000);
 
                 await Task.Delay(rInt, cancellationToken);
             }
