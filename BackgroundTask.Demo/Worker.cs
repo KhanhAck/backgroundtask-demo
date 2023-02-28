@@ -28,6 +28,9 @@ namespace BackgroundTask.Demo
         {
             while (!cancellationToken.IsCancellationRequested)
             {
+                var r = new Random();
+                int rInt = r.Next(50000, 100000);
+
                 Interlocked.Increment(ref number);
                 logger.LogInformation($"Worker printing number: {number}");
 
@@ -54,34 +57,40 @@ namespace BackgroundTask.Demo
                         //Switch về tab đầu tiên
                         driver.SwitchTo().Window(tabs[0]);
 
-                        Thread.Sleep(3000);
+                        Thread.Sleep(rInt);
+                        rInt = r.Next(50000, 100000);
 
                         //Click vào nút connect
                         driver.FindElement(By.Id("ConnectionButton")).Click();
 
-                        Thread.Sleep(3000);
+                        Thread.Sleep(rInt);
+                        rInt = r.Next(50000, 100000);
 
                         driver.Navigate().GoToUrl("https://phim18.live");
 
-                        Thread.Sleep(3000);
+                        Thread.Sleep(rInt);
+                        rInt = r.Next(50000, 100000);
 
                         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
                         var quickView = wait.Until(drv => drv.FindElement(By.XPath("//a[contains(text(), 'Xem nhanh')]")));
                         quickView.Click();
 
-                        Thread.Sleep(5000);
+                        Thread.Sleep(rInt);
+                        rInt = r.Next(50000, 100000);
 
                         var button = wait.Until(drv => drv.FindElement(By.Id("video-content")));
                         button.Click();
 
-                        Thread.Sleep(3000);
+                        Thread.Sleep(rInt);
+                        rInt = r.Next(50000, 100000);
 
                         //Switch về tab đầu tiên
                         driver.SwitchTo().Window(tabs[0]);
 
                         button.Click();
 
-                        Thread.Sleep(3000);
+                        rInt = r.Next(120000, 300000);
+                        Thread.Sleep(rInt);
                     }
                 }
                 catch (Exception ex)
@@ -89,8 +98,7 @@ namespace BackgroundTask.Demo
                     logger.LogError(ex, ex.Message);
                 }
 
-                var r = new Random();
-                int rInt = r.Next(60000, 180000);
+                rInt = r.Next(50000, 100000);
 
                 await Task.Delay(rInt, cancellationToken);
             }
