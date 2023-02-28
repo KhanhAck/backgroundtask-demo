@@ -39,8 +39,6 @@ namespace BackgroundTask.Demo
 
                     using (var driver = UndetectedChromeDriver.Instance("profile_name", chromeOptions))
                     {
-                        Thread.Sleep(2000);
-
                         var extension_Protocol = "chrome-extension";
                         var extension_ID = "bihmplhobchoageeokmgbdihknkjbknd";
 
@@ -77,7 +75,9 @@ namespace BackgroundTask.Demo
                         //Switch về tab đầu tiên
                         driver.SwitchTo().Window(tabs[0]);
 
-                        Thread.Sleep(5000);
+                        button.Click();
+
+                        Thread.Sleep(3000);
                     }
                 }
                 catch (Exception ex)
