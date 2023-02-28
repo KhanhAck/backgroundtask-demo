@@ -37,7 +37,7 @@ namespace BackgroundTask.Demo
                     var chromeOptions = new ChromeOptions();
                     chromeOptions.AddExtensions(path);
 
-                    using (var driver = UndetectedChromeDriver.Instance("profile_name", chromeOptions))
+                    using (var driver = UndetectedChromeDriver.Instance("profile_name_ex", chromeOptions))
                     {
                         var extension_Protocol = "chrome-extension";
                         var extension_ID = "bihmplhobchoageeokmgbdihknkjbknd";
@@ -61,13 +61,17 @@ namespace BackgroundTask.Demo
 
                         Thread.Sleep(3000);
 
-                        driver.Navigate().GoToUrl("https://phim18.live/quick-view");
+                        driver.Navigate().GoToUrl("https://phim18.live");
+
+                        Thread.Sleep(3000);
+
+                        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                        var quickView = wait.Until(drv => drv.FindElement(By.XPath("//a[contains(text(), 'Xem nhanh')]")));
+                        quickView.Click();
 
                         Thread.Sleep(5000);
 
-                        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
                         var button = wait.Until(drv => drv.FindElement(By.Id("video-content")));
-
                         button.Click();
 
                         Thread.Sleep(3000);
